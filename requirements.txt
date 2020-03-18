@@ -1,0 +1,8 @@
+six
+wheel
+django_boto>=0.3.12,<1.0
+cloudinary>=1.20.0,<2.0
+django>=2.0,<3.0
+djangorestframework>=3.8,<4.0
+psycopg2-binary>=2.8,<3
+humanfriendly>=8,<9
