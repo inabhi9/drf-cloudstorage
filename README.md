@@ -1,6 +1,21 @@
 drf-cloudstorage
 ================
-This django app is unified 
+Aim of this app to simplify the static file upload to a cloud needed to integrate with 
+django rest framework app.
+
+**Motivation:**  
+Static file upload is needed in many part of an app. 
+Creating different routes for each module that supports multipart data and validation is quite
+tedious and cumbersome; and also difficult for frontend development.
+
+So hance the app.
+
+## Features
+
+* Upload to S3 and Cloudinary.
+* Single endpoint to manage files.
+* File mime type and size validation.
+* Automatic ForeignKey / ManyToManyField link. 
 
 ## Installation
 
@@ -14,3 +29,5 @@ the pip way
 
 * Docs
 * Test S3
+* CI integration
+* PyPI upload
