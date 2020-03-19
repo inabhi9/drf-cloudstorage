@@ -1,6 +1,7 @@
 import mimetypes
 
 import humanfriendly
+from django.conf import settings
 from django.core.exceptions import FieldDoesNotExist
 from django.utils.translation import ugettext_lazy as _
 from rest_framework import serializers
@@ -16,7 +17,9 @@ class CloudFileSerializer(ModelSerializer):
     file = serializers.FileField(required=True, write_only=True)
     target = serializers.CharField(required=True, write_only=True, max_length=500)
     extra = serializers.DictField(read_only=True)
-    storage = serializers.ChoiceField(choices=PROVIDERS, required=True, write_only=True)
+    storage = serializers.ChoiceField(choices=PROVIDERS, write_only=True,
+                                      default=getattr(settings, 'CLOUDSTORAGE_DEFAULT_PROVIDER',
+                                                      None))
     link_target = serializers.BooleanField(write_only=True, default=True)
 
     class Meta:
@@ -24,6 +27,11 @@ class CloudFileSerializer(ModelSerializer):
         read_only_fields = ('url', 'owner')
         owner_field = 'owner'
         exclude = ('upload_resp',)
+
+    def validate_storage(self, value):
+        if not value:
+            raise ValidationError(_('This field is required.'))
+        return value
 
     def validate_target(self, value):
         content_type, field = StorageProviderManagerMixin._parse_target(value)
