@@ -246,3 +246,4 @@ ENV/
 
 *.iml
 /drf_cloudstorage/drf_cloudstorage/settings/local.py
+/src/drf_app/settings/local.py
