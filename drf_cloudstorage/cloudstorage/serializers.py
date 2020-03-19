@@ -16,7 +16,7 @@ class CloudFileSerializer(ModelSerializer):
     file = serializers.FileField(required=True, write_only=True)
     target = serializers.CharField(required=True, write_only=True, max_length=500)
     extra = serializers.DictField(read_only=True)
-    provider = serializers.ChoiceField(choices=PROVIDERS, required=True, write_only=True)
+    storage = serializers.ChoiceField(choices=PROVIDERS, required=True, write_only=True)
 
     class Meta:
         model = CloudFile

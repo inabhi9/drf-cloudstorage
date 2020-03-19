@@ -137,11 +137,11 @@ class CloudinaryFileManager(Manager, StorageProviderManagerMixin):
 
 class CloudFileManager(Manager):
     def create_and_upload(self, f, **kwargs):
-        provider = kwargs.pop('provider')
+        storage = kwargs.pop('storage')
 
-        if provider == StorageProvider.CLOUDINARY:
+        if storage == StorageProvider.CLOUDINARY:
             manager = self.model.cloudinary
-        elif provider == StorageProvider.S3:
+        elif storage == StorageProvider.S3:
             manager = self.model.s3
         else:
             raise Exception
