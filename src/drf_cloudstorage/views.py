@@ -3,8 +3,8 @@ from rest_framework.mixins import CreateModelMixin, DestroyModelMixin
 from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet
 
-from cloudstorage.models import CloudFile
-from cloudstorage.serializers import CloudFileSerializer, CloudFileListSerializer
+from drf_cloudstorage.models import CloudFile
+from drf_cloudstorage.serializers import CloudFileSerializer, CloudFileListSerializer
 
 
 class CloudFileViewSet(CreateModelMixin, DestroyModelMixin, GenericViewSet):

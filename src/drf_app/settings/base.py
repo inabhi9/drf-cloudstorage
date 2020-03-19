@@ -31,7 +31,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'django.contrib.auth',
     'django.contrib.contenttypes',
-    'cloudstorage',
+    'drf_cloudstorage',
     'example'
 ]
 
@@ -40,7 +40,7 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
 ]
 
-ROOT_URLCONF = 'drf_cloudstorage.urls'
+ROOT_URLCONF = 'drf_app.urls'
 
 WSGI_APPLICATION = 'drf_cloudstorage.wsgi.application'
 

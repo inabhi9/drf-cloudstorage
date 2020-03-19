@@ -10,8 +10,8 @@ except ImportError:
 me = 'Abhinav Kotak'
 memail = 'in.abhi9@gmail.com'
 
-packages = ['drf_cloudstorage', 'drf_cloudstorage.cloudstorage',
-            'drf_cloudstorage.cloudstorage.migrations']
+packages = ['drf_cloudstorage', 'drf_cloudstorage.migrations']
+package_dir = {'drf_cloudstorage': 'src/drf_cloudstorage'}
 install_requires = open('requirements.txt', 'r').readlines()
 
 setup(
@@ -28,6 +28,7 @@ setup(
     license=open('LICENSE', 'r').read(),
     keywords=['djangorestframework', 'drf', 'cloudstorage'],
     packages=packages,
+    package_dir=package_dir,
     platforms=['Independant'],
     classifiers=[
         'Development Status :: 1 - beta',

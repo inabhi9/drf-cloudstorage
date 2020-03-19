@@ -1,6 +1,6 @@
 from rest_framework.routers import SimpleRouter
 
-from cloudstorage import views
+from drf_cloudstorage import views
 
 router = SimpleRouter(trailing_slash=False)
 router.register('', views.CloudFileViewSet)

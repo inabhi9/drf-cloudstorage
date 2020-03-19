@@ -17,6 +17,6 @@ from django.conf.urls import url
 from django.urls import include
 
 urlpatterns = [
-    url(r'^cloudfiles', include('cloudstorage.urls')),
+    url(r'^cloudfiles', include('drf_cloudstorage.urls')),
     url(r'^examples', include('example.urls')),
 ]

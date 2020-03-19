@@ -2,7 +2,7 @@ import humanfriendly
 from django.core import checks
 from django.db.models import ForeignKey, ManyToManyField
 
-from cloudstorage.models import AbstractCloudFile
+from drf_cloudstorage.models import AbstractCloudFile
 
 
 class CustomAttributeFieldMixin:

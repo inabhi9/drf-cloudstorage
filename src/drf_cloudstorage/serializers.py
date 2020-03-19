@@ -8,9 +8,9 @@ from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
 from rest_framework.serializers import ModelSerializer
 
-from cloudstorage.constants import PROVIDERS
-from cloudstorage.errors import CloudFileError
-from cloudstorage.models import CloudFile, StorageProviderManagerMixin
+from drf_cloudstorage.constants import PROVIDERS
+from drf_cloudstorage.errors import CloudFileError
+from drf_cloudstorage.models import CloudFile, StorageProviderManagerMixin
 
 
 class CloudFileSerializer(ModelSerializer):
