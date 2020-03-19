@@ -38,7 +38,7 @@ class StorageProviderManagerMixin:
         content_type = kwargs.get('content_type') or None
         content_field = kwargs.get('content_field') or None
         target = kwargs.pop('target', None)
-        link_content = kwargs.pop('link_content', False)
+        link_target = kwargs.pop('link_target', False)
         use_filename = kwargs.pop('use_filename', False)
 
         assert target or (content_type and content_field)
@@ -59,8 +59,8 @@ class StorageProviderManagerMixin:
             cloudfile.upload_resp = resp
             cloudfile.save()
 
-            if link_content is True:
-                cloudfile.link_to_content()
+            if link_target is True:
+                cloudfile.link_to_target()
 
         return cloudfile
 
@@ -188,7 +188,7 @@ class AbstractCloudFile(Model):
 
         return {}
 
-    def link_to_content(self):
+    def link_to_target(self):
         """
         Sets foreign key or add to the object located by content_type, object_id and content_field
 
