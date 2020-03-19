@@ -195,8 +195,6 @@ class AbstractCloudFile(Model):
         """
         Sets foreign key or add to the object located by content_type, object_id and content_field
 
-        :TODO: Validate field class having ForiegnKey/ManyToMany to this class.
-
         :return Model: Object that is linked
         """
 
@@ -204,14 +202,17 @@ class AbstractCloudFile(Model):
 
         model_cls = self.content_type.model_class()
         field = model_cls._meta.get_field(self.content_field)
-        has_many_files = isinstance(field, models.ManyToManyField)
+        has_many_files = issubclass(field.__class__, models.ManyToManyField)
+        has_one_file = issubclass(field.__class__, models.ForeignKey)
         obj = model_cls.objects.get(pk=self.object_id)
 
         if has_many_files:
             getattr(obj, self.content_field).add(self)
-        else:
+        elif has_one_file:
             setattr(obj, self.content_field, self)
             obj.save(update_fields=[self.content_field])
+        else:
+            raise NotImplementedError
 
         return obj
 
