@@ -59,8 +59,11 @@ class StorageProviderManagerMixin:
             cloudfile.upload_resp = resp
             cloudfile.save()
 
-            if link_target is True:
-                cloudfile.link_to_target()
+            try:
+                if link_target is True:
+                    cloudfile.link_to_target()
+            except AssertionError:
+                pass
 
         return cloudfile
 
@@ -196,6 +199,9 @@ class AbstractCloudFile(Model):
 
         :return Model: Object that is linked
         """
+
+        assert self.object_id is not None
+
         model_cls = self.content_type.model_class()
         field = model_cls._meta.get_field(self.content_field)
         has_many_files = isinstance(field, models.ManyToManyField)
