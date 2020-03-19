@@ -43,6 +43,10 @@ class CloudFileSerializer(ModelSerializer):
 
         self._validate_mime_type(field_cls, file)
         self._validate_file_size(field_cls, file)
+        try:
+            self._validate_target_object(model_cls, attrs['object_id'])
+        except KeyError:
+            pass
 
         return attrs
 
@@ -61,6 +65,12 @@ class CloudFileSerializer(ModelSerializer):
             raise CloudFileError(_(
                 'File size must be between %s and %s' %
                 (humanfriendly.format_size(min_size), humanfriendly.format_size(max_size))
+            ))
+
+    def _validate_target_object(self, model_cls, object_id):
+        if model_cls.objects.filter(id=object_id).exists() is False:
+            raise ValidationError(_(
+                "Object id '%s' with provided target does not exist." % object_id
             ))
 
     def create(self, validated_data):
