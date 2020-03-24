@@ -151,6 +151,11 @@ class CloudFileManager(Manager):
 
         return manager.create_and_upload(f, **kwargs)
 
+    def filter_by_target(self, target):
+        content_type, field = StorageProviderManagerMixin._parse_target(target)
+
+        return self.filter(content_type=content_type, content_field=field)
+
 
 class AbstractCloudFile(Model):
     """
