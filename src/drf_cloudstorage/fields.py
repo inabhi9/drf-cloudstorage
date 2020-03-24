@@ -12,8 +12,8 @@ class CustomAttributeFieldMixin:
         """
 
         self.allowed_mime_types = kwargs.pop('allowed_mime_types', None)
-        self.min_file_size = kwargs.pop('min_file_size', None)
-        self.max_file_size = kwargs.pop('max_file_size', None)
+        self._min_file_size = kwargs.pop('min_file_size', None)
+        self._max_file_size = kwargs.pop('max_file_size', None)
 
         super().__init__(*args, **kwargs)
 
@@ -23,6 +23,26 @@ class CustomAttributeFieldMixin:
             *self._check_cloudfile_subclass(),
             *self._check_validation_attribute(),
         ]
+
+    @property
+    def min_file_size(self):
+        """
+        For some reason, when app is used with uwsgi, self.min_file_size assigned in .check()
+        does not preserved.
+
+        :return int: min_file_size in bytes
+        """
+        return humanfriendly.parse_size(self._min_file_size, binary=True)
+
+    @property
+    def max_file_size(self):
+        """
+        For some reason, when app is used with uwsgi, self.max_file_size assigned in .check()
+        does not preserved.
+
+        :return int: max_file_size in bytes
+        """
+        return humanfriendly.parse_size(self._max_file_size, binary=True)
 
     def _check_cloudfile_subclass(self):
         if issubclass(self.related_model, AbstractCloudFile) is False:
@@ -41,7 +61,7 @@ class CustomAttributeFieldMixin:
 
     def _check_validation_attribute(self):
         try:
-            self.min_file_size = humanfriendly.parse_size(self.min_file_size, binary=True)
+            humanfriendly.parse_size(self._min_file_size, binary=True)
         except TypeError:
             return [
                 checks.Error(
@@ -52,7 +72,7 @@ class CustomAttributeFieldMixin:
             ]
 
         try:
-            self.max_file_size = humanfriendly.parse_size(self.max_file_size, binary=True)
+            humanfriendly.parse_size(self._max_file_size, binary=True)
         except TypeError:
             return [
                 checks.Error(
