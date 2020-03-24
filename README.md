@@ -8,8 +8,6 @@ Static file upload is needed in many part of an app.
 Creating different routes for each module that supports multipart data and validation is quite
 tedious and cumbersome; and also difficult for frontend development.
 
-So hance the app.
-
 ## Features
 
 * Upload to S3 and Cloudinary.
