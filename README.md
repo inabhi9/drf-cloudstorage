@@ -25,8 +25,17 @@ the pip way
 
     pip install drf-cloudstorage
     
+    
+## Dependency
+
+- Python 3.6.x or later
+- Django 2.2.x
+- Postgres 9.x or later
+- Django-rest-framework 3.8.x
+
 ## To Do:
 
+* Implement GC
 * Docs
 * Test S3
 * CI integration
