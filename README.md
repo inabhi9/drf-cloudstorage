@@ -27,7 +27,7 @@ the pip way
 ## Dependency
 
 - Python 3.6.x or later
-- Django 2.2.x
+- Django >= 2.2.x <= 3.0.x
 - Postgres 9.x or later
 - Django-rest-framework 3.8.x
 
