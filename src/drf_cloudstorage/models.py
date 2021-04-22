@@ -232,6 +232,19 @@ class AbstractCloudFile(Model):
         raise NotImplementedError
 
     @property
+    def signed_url(self):
+        """
+        :return presigned URL which get expire after settings.S3_SIGNED_URL_EXPIRES_IN seconds.
+        """
+        if self.upload_resp['storage'] == 's3':
+            return S3FileManager.boto_s3().get_url(self.upload_resp['name'],
+                                                   self.upload_resp['prefix'],
+                                                   expires=settings.S3_SIGNED_URL_EXPIRES_IN,
+                                                   query_auth=True)
+
+        return ''
+
+    @property
     def _cloudinary_extra(self):
         cloudinary_cls = CloudinaryHelper(self.upload_resp)
 

@@ -79,3 +79,6 @@ CLOUDINARY_API_SECRET = None
 #: This storage provider will be used by default for storing files. This can be override in the
 # upload request. Valid values are from 'cloudstorage.constants.PROVIDERS"
 CLOUDSTORAGE_DEFAULT_PROVIDER = None
+
+# s3 pre signed url expires in x seconds
+S3_SIGNED_URL_EXPIRES_IN = 0
