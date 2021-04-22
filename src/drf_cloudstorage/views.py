@@ -4,7 +4,7 @@ from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet
 
 from drf_cloudstorage.models import CloudFile
-from drf_cloudstorage.serializers import CloudFileSerializer, CloudFileListSerializer
+from drf_cloudstorage.serializers import CloudFileSerializer, CloudFileListSerializer, CloudFileURLSignedListSerializer
 
 
 class CloudFileViewSet(CreateModelMixin, DestroyModelMixin, GenericViewSet):
@@ -18,6 +18,6 @@ class CloudFileViewSet(CreateModelMixin, DestroyModelMixin, GenericViewSet):
         self.perform_create(serializer)
 
         headers = self.get_success_headers(serializer.data)
-        serializer = CloudFileListSerializer(serializer.instance)
+        serializer = CloudFileURLSignedListSerializer(serializer.instance)
 
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
