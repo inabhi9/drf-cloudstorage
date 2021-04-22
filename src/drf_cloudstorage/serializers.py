@@ -21,6 +21,7 @@ class CloudFileSerializer(ModelSerializer):
                                       default=getattr(settings, 'CLOUDSTORAGE_DEFAULT_PROVIDER',
                                                       None))
     link_target = serializers.BooleanField(write_only=True, default=True)
+    signed_url = serializers.ReadOnlyField()
 
     class Meta:
         model = CloudFile
@@ -90,3 +91,11 @@ class CloudFileListSerializer(ModelSerializer):
     class Meta:
         model = CloudFile
         fields = ('url', 'id', 'extra', 'name', 'owner', 'created_at')
+
+
+class CloudFileURLSignedListSerializer(ModelSerializer):
+    signed_url = serializers.ReadOnlyField()
+
+    class Meta:
+        model = CloudFile
+        fields = ('url', 'id', 'extra', 'name', 'owner', 'created_at', 'signed_url')
